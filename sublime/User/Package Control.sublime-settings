@@ -1,0 +1,17 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"BracketHighlighter",
+		"EditorConfig",
+		"Emmet",
+		"JsPrettier",
+		"LESS",
+		"Package Control",
+		"Solarized Color Scheme",
+		"TypeScript"
+	]
+}
