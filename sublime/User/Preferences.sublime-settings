@@ -1,11 +1,26 @@
 {
-	"color_scheme": "Packages/Color Scheme - Default/Monokai.sublime-color-scheme",
+	"binary_file_patterns":
+	[
+		"*.jpg",
+		"*.jpeg",
+		"*.png",
+		"*.gif",
+		"*.ttf",
+		"*.tga",
+		"*.dds",
+		"*.ico",
+		"*.eot",
+		"*.pdf",
+		"*.swf",
+		"*.jar",
+		"*.zip",
+		"node_modules/**"
+	],
+	"color_scheme": "Packages/Color Scheme - Default/Mariana.tmTheme",
 	"font_face": "Hack",
-	"font_size": 8,
 	"ignored_packages":
 	[
 		"Vintage"
 	],
-	"theme": "Adaptive.sublime-theme",
-	"binary_file_patterns": ["*.jpg", "*.jpeg", "*.png", "*.gif", "*.ttf", "*.tga", "*.dds", "*.ico", "*.eot", "*.pdf", "*.swf", "*.jar", "*.zip", "node_modules/**"]
+	"theme": "Adaptive.sublime-theme"
 }
