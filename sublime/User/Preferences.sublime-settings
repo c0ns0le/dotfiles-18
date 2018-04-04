@@ -16,7 +16,7 @@
 		"*.zip",
 		"node_modules/**"
 	],
-	"color_scheme": "Packages/Color Scheme - Default/Mariana.tmTheme",
+	"color_scheme": "Packages/Solarized Color Scheme/Solarized (dark).tmTheme",
 	"font_face": "Hack",
 	"ignored_packages":
 	[
