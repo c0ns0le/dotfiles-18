@@ -18,6 +18,7 @@
 	],
 	"color_scheme": "Packages/Solarized Color Scheme/Solarized (dark).tmTheme",
 	"font_face": "Hack",
+	"font_size": 9,
 	"ignored_packages":
 	[
 		"Vintage"
