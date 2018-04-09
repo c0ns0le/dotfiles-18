@@ -1,0 +1,9 @@
+{
+	"codeintel_enabled_languages":
+    [
+    	"Python", "Python3", "Less"
+       // "JavaScript", "SCSS", "Python", "HTML",
+       // "Ruby", "Python3", "XML", "Sass", "HTML5", "Perl", "CSS",
+       // "Twig", "Less", "Node.js", "TemplateToolkit", "PHP"
+    ]
+}

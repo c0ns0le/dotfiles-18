@@ -16,11 +16,13 @@
 		"*.zip",
 		"node_modules/**"
 	],
-	"color_scheme": "Packages/Solarized Color Scheme/Solarized (dark).tmTheme",
+	"color_scheme": "Packages/Color Scheme - Default/Mariana.sublime-color-scheme",
 	"font_face": "Hack",
 	"font_size": 9,
 	"ignored_packages":
 	[
+		"Pylinter",
+		"SideBarEnhancements",
 		"Vintage"
 	],
 	"theme": "Adaptive.sublime-theme"

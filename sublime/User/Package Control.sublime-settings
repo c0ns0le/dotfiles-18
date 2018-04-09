@@ -5,16 +5,27 @@
 	],
 	"installed_packages":
 	[
+		"All Autocomplete",
+		"Base16 Color Schemes",
 		"BracketHighlighter",
+		"Dracula Color Scheme",
 		"EditorConfig",
 		"Elm Language Support",
 		"Emmet",
 		"gruvbox",
 		"JsPrettier",
 		"LESS",
+		"One Dark Color Scheme",
 		"Package Control",
+		"Pylinter",
+		"Rainglow",
 		"SetWindowTitle",
+		"SideBarEnhancements",
 		"Solarized Color Scheme",
-		"TypeScript"
+		"SublimeCodeIntel",
+		"SublimeREPL",
+		"Tomorrow Color Schemes",
+		"TypeScript",
+		"Wombat Color Scheme"
 	]
 }

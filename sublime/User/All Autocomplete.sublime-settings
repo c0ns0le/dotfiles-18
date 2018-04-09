@@ -1,0 +1,7 @@
+{
+	"exclude_from_completion": [
+		"*.ts",
+		"*.elm",
+		"*.tsx"
+	]
+}

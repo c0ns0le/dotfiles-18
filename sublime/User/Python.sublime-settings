@@ -1,0 +1,12 @@
+// These settings override both User and Default settings for the Python syntax
+{
+	"rulers": [79],
+	"file_exclude_patterns": [
+		"*.pyc",
+		"*.pid"
+	],
+	"folder_exclude_patterns": [
+		".git",
+		"__pycache__"
+	]
+}
