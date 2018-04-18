@@ -27,12 +27,18 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets' 
 Plug 'ianks/vim-tsx'
+Plug 'Quramy/tsuquyomi'
+"Plug 'prabirshrestha/asyncomplete.vim'
+"Plug 'prabirshrestha/async.vim'
+"Plug 'prabirshrestha/vim-lsp'
+"Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 " Environment
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'json'] }
+"Plug 'prettier/vim-prettier', {
+"  \ 'do': 'yarn install',
+"  \ 'for': ['javascript', 'typescript', 'json'] }
 Plug 'editorconfig/editorconfig-vim'
+Plug 'sbdchd/neoformat'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -105,17 +111,45 @@ let airline#extensions#whitespace#enabled = 0
 let g:solarized_termcolors=256
 let g:solarized_underline=0
 
+" language server settings
+"if executable('pyls')
+"    " pip install python-language-server
+"    au User lsp_setup call lsp#register_server({
+"        \ 'name': 'pyls',
+"        \ 'cmd': {server_info->['pyls']},
+"        \ 'whitelist': ['python'],
+"        \ })
+"endif
+"
+"if executable('typescript-language-server')
+"    au User lsp_setup call lsp#register_server({
+"        \ 'name': 'typescript-language-server',
+"        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+"        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+"        \ 'whitelist': ['typescript', 'javascript'],
+"        \ })
+"endif
+"
+"if executable('css-languageserver')
+"    au User lsp_setup call lsp#register_server({
+"        \ 'name': 'css-languageserver',
+"        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
+"        \ 'whitelist': ['css', 'less', 'sass'],
+"        \ })
+"endif
+
 " key bindings
 let mapleader = ' '
 
 inoremap jj <esc>
+nnoremap <leader>b :CtrlPBuffer<cr>
 nnoremap <leader>g :Gstatus<cr>
 nnoremap <leader>s :w<cr>
 nnoremap <leader>ev :e ~/dotfiles/.vimrc<CR>
 nnoremap <leader>ss :source %<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader><space> :nohlsearch<cr>
-nnoremap <leader>f :PrettierAsync<CR>
+nnoremap <leader>f :Neoformat<CR>
 nnoremap <leader>v :vsp<CR>
 nnoremap <leader>h :sp<CR>
 nnoremap <c-j> <c-w>j
@@ -123,6 +157,11 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 inoremap <C-Space> <c-x><c-o>
+"imap <c-space> <Plug>(asyncomplete_force_refresh)
+"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+"autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
@@ -148,6 +187,8 @@ augroup colorscheme_customizations
   autocmd!
   autocmd ColorScheme * call ColorschemeCustomizations()
 augroup END
+
+call ColorschemeCustomizations()
 
 " status line
 

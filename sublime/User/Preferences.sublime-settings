@@ -16,7 +16,7 @@
 		"*.zip",
 		"node_modules/**"
 	],
-	"color_scheme": "Packages/Color Scheme - Default/Mariana.sublime-color-scheme",
+	"color_scheme": "Packages/Solarized Color Scheme/Solarized (light).tmTheme",
 	"font_face": "Hack",
 	"font_size": 9,
 	"ignored_packages":
