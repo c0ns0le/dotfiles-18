@@ -1,9 +1,20 @@
-"set nocompatible
+" For a paranoia.
+" Normally `:set nocp` is not needed, because it is done automatically
+" when .vimrc is found.
+if &compatible
+  " `:set nocp` has many side effects. Therefore this should be done
+  " only when 'compatible' is set.
+  set nocompatible
+endif
+
+packadd minpac
+
 filetype plugin indent on
 syntax on
 set background=light
 colo solarized8_light
 
+set noshowmode
 set nojoinspaces
 set signcolumn=yes
 set wildmenu
@@ -39,18 +50,134 @@ if has('gui_running')
   set guioptions-=L "left scroll
 endif
 
-packadd minpac
 call minpac#init()
 
+call minpac#add('scrooloose/nerdtree')
+call minpac#add('vim-airline/vim-airline', {'type': 'opt'})
+call minpac#add('vim-airline/vim-airline-themes', {'type': 'opt'})
+call minpac#add('mattn/emmet-vim')
+call minpac#add('lunaru/vim-less')
+call minpac#add('skammer/vim-css-color')
+call minpac#add('hail2u/vim-css3-syntax')
+call minpac#add('SirVer/ultisnips')
+call minpac#add('honza/vim-snippets' )
+call minpac#add('ianks/vim-tsx')
+call minpac#add('editorconfig/editorconfig-vim')
+call minpac#add('sbdchd/neoformat')
+call minpac#add('tpope/vim-surround')
+call minpac#add('tpope/vim-commentary')
 call minpac#add('lifepillar/vim-solarized8')
 call minpac#add('tpope/vim-fugitive')
 call minpac#add('leafgarland/typescript-vim')
+call minpac#add('Quramy/tsuquyomi')
+call minpac#add('ctrlpvim/ctrlp.vim')
+call minpac#add('vim-jp/syntax-vim-ex')
 
-command! PackUpdate call minpac#update()
+function! s:switch_ref(hooktype, name)
+  let l:ref = minpac#getpluginfo(a:name).ref
+  let l:dir = minpac#getpluginfo(a:name).dir
+
+  let l:change_ref = 'cd ' . l:dir . ' && git reset --hard ' . l:ref
+
+  if has('win32')
+    let l:cmd = &shell . ' /C '.l:change_ref
+  else
+    let l:cmd = ['sh', '-c', l:change_ref]
+  endif
+
+  call job_start(l:cmd, {
+    \ 'on_stdout': function('s:on_switch_ref_stdout'),
+    \ 'on_stderr': function('s:on_switch_ref_stderr'),
+    \ 'on_exit': function('s:on_switch_ref_exit')
+    \ })
+endfunction
+
+function! s:on_switch_ref_stdout(jobid, data, event)
+  echom 'stdout'.data
+endfunction
+
+function! s:on_switch_ref_stderr(jobid, data, event)
+  echom 'stderr'.data
+endfunction
+
+function! s:on_switch_ref_exit(jobid, err_code, event)
+  echom 'error code'.err_code
+endfunction
+
+"\ 'ref': '932ffac',
+"\ 'do': function('s:switch_ref')
+call minpac#add('airblade/vim-gitgutter', {
+  \ 'frozen': 1,
+  \ 'depth': 0
+  \ })
+call minpac#add('k-takata/minpac', {'type': 'opt'})
+
+command! PackUpdate source ~/_vimrc | call minpac#update()
 command! PackClean call minpac#clean()
+
+" enabled optional plugins
+packadd! vim-airline
+packadd! vim-airline-themes
+
+" ctrl p settings
+let g:ctrlp_max_height = 30
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
+
+" airline settings
+let g:airline_skip_empty_sections = 1
+let g:airline_section_y = ''
+let g:airline_powerline_fonts = 1
+let airline#extensions#whitespace#enabled = 0
 
 let mapleader = ' '
 
 nnoremap <leader>g :Gstatus<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>s :source %<CR>
+nnoremap <leader>p :PackUpdate<CR>
+nnoremap <leader>n :NerdTreeToggle<CR>
+nnoremap <leader>f :CtrlP<CR>
+nnoremap <leader>b :CtrlPBuffer<CR>
+nnoremap <leader>c :Neoformat<CR>
+nnoremap <leader><leader> :set nohlsearch<CR>
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+inoremap jj <esc>
+
+function! SetTypeScriptKeyboardMappings()
+  nnoremap <f12> :TsuDefinition<cr>
+  nnoremap <f2> :TsuDefinition<cr>
+endfunction
+
+augroup FileTypeSettings
+  au!
+
+  au FileType typescript call SetTypeScriptKeyboardMappings()
+augroup END
+
+fun! ColorschemeCustomizations()
+  if g:colors_name == 'solarized8'
+    if &background == 'light'
+      highlight CursorLine guibg='#FDF6E3'
+      highlight CursorLineNr guibg='#FDF6E3' guifg='#657B83'
+      highlight StatusLine guifg='#EFE8D5' guibg='#657B83'
+      highlight StatusLineNC guifg='#DDD6C7' guibg='#657B83'
+      highlight VertSplit guifg='#FDF6E3' guibg='#FDF6E3'
+    else
+      highlight CursorLineNr guibg='#063642' guifg='#586E75'
+      highlight StatusLine guifg='#063642' guibg='#6B8686'
+      highlight StatusLineNC guifg='#042730' guibg='#5F696B'
+    endif
+  endif
+endfu
+
+augroup colorscheme_customizations
+  autocmd!
+  autocmd ColorScheme * call ColorschemeCustomizations()
+augroup END
+
+call ColorschemeCustomizations()
