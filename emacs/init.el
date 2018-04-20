@@ -13,6 +13,7 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+;; my default configs
 (when is-windows
   (set-frame-font "Hack 11" nil t))
 
@@ -26,18 +27,22 @@
 (setq frame-title-format "emacs"
       inhibit-splash-screen t
       inhibit-startup-screen t
-      custom-file "~/.emacs.d/custom.el")
+      custom-file "~/.emacs.d/custom.el"
+      make-backup-files nil
+      auto-save-default nil)
 
 
 (load custom-file)
 
-
 ;;(use-package challenger-deep-theme :ensure t)
-(use-package monokai-theme
-  :ensure t)
+;;(use-package monokai-theme :ensure t)
+;;(use-package material-theme :ensure t :config (load-theme 'material 'no-confirm))
+;;(use-package arjen-grey-theme :ensure t)
+(use-package nord-theme :ensure t)
 
 (use-package company
   :ensure t
+  :diminish
   :config
   (progn
     ;; align annotations to the right
@@ -46,8 +51,12 @@
 
 (use-package which-key
   :ensure t
+  :diminish
   :config
   (which-key-mode))
+
+(use-package diminish :ensure t)
+(use-package delight :ensure t)
 
 (use-package tide
   :ensure t
@@ -66,6 +75,7 @@
 
 (use-package editorconfig
   :ensure t
+  :diminish
   :config
   (editorconfig-mode))
 
@@ -76,3 +86,30 @@
 (use-package prettier-js
   :hook typescript-mode
   :ensure t)
+
+(use-package nlinum
+  :ensure t
+  :config
+  (global-nlinum-mode t))
+
+;; https://www.reddit.com/r/emacs/comments/51lqn9/helm_or_ivy/
+(use-package ivy
+  :ensure t
+  :diminish
+  :config
+  (ivy-mode t)
+  ;; maybe don't use virtual buffers
+  (setq ivy-count-format ""
+	ivy-display-style nil
+	ivy-minibuffer-faces nil)
+
+  ;; add fuzzy matching
+  ;;(setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+
+  (define-key ivy-minibuffer-map (kbd "C-m") 'ivy-alt-done))
+
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-mode)
+  (setq projectile-completion-system 'ivy))
