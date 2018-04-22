@@ -63,6 +63,10 @@
   :hook (typescript-mode . setup-tide-mode)
   :preface
   (progn
+    (defun setup-typescript-keybindings ()
+      (define-key typescript-mode-map [f12] 'tide-goto-reference)
+      (define-key typescript-mode-map [f11] 'tide-references)
+      (define-key typescript-mode-map [f2] 'tide-rename-symbol))
     (defun setup-tide-mode ()
       (interactive)
       (tide-setup)
@@ -71,7 +75,8 @@
       (company-mode t)
       (tide-hl-identifier-mode t)
       (setq flycheck-idle-change-delay 2)
-      (setq flycheck-check-syntax-automatically '(save mode-enabled idle-change)))))
+      (setq flycheck-check-syntax-automatically '(save mode-enabled idle-change))
+      (setup-typescript-keybindings))))
 
 (use-package editorconfig
   :ensure t
@@ -84,16 +89,26 @@
   :ensure t)
 
 (use-package prettier-js
-  :hook typescript-mode
-  :ensure t)
+  :ensure t
+  :config
+  (add-hook 'typescript-mode-hook 'prettier-js-mode))
 
 (use-package nlinum
   :ensure t
   :config
   (global-nlinum-mode t))
 
+(use-package ido
+  :init
+  (setq ido-enable-flex-matching t
+	ido-everywhere t
+	ido-create-new-buffer 'always)
+  :config
+  (ido-mode t))
+
 ;; https://www.reddit.com/r/emacs/comments/51lqn9/helm_or_ivy/
 (use-package ivy
+  :disabled t
   :ensure t
   :diminish
   :config
@@ -104,12 +119,12 @@
 	ivy-minibuffer-faces nil)
 
   ;; add fuzzy matching
-  ;;(setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
 
   (define-key ivy-minibuffer-map (kbd "C-m") 'ivy-alt-done))
 
 (use-package projectile
   :ensure t
   :config
-  (projectile-mode)
-  (setq projectile-completion-system 'ivy))
+  (projectile-mode))
+  ;;(setq projectile-completion-system 'ivy))

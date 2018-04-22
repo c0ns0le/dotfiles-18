@@ -3,3 +3,4 @@ eshell
 *.cache
 *.eld
 recentf
+*.last
