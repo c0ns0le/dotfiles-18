@@ -1,0 +1,115 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Mon Apr 23 10:00:53 2018
+;; Desktop file format version 208
+;; Emacs version 25.3.1
+
+;; Global section:
+(setq desktop-saved-frameset [frameset 1 (23262 821 846000 300000) (desktop . "208") "ryolson@OLSONNA12144RX" nil nil ((((font-backend gdi) (font . "-outline-Hack-normal-normal-normal-mono-18-*-*-*-p-*-iso8859-1") (border-width . 2) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (foreground-color . "#D8DEE9") (background-color . "#2E3440") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (alpha) (menu-bar-lines . 0) (tool-bar-lines . 0) (height . 59) (title) (icon-type) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 0) (scroll-bar-height . 0) (fullscreen . maximized) (display-type . color) (background-mode . dark) (cursor-color . "#D8DEE9") (environment) (frameset--id . "68AF-DC4F-0575-6C76") (frameset--mini t . t) (modeline . t) (minibuffer . t) (unsplittable) (icon-name) (display . "w32") (explicit-name) (tool-bar-position . top) (visibility . t) (width . 189) (left + -9) (top + -9)) ((min-height . 8) (min-width . 10) (min-height-ignore . 4) (min-width-ignore . 7) (min-height-safe . 2) (min-width-safe . 2) (min-pixel-height . 168) (min-pixel-width . 110) (min-pixel-height-ignore . 84) (min-pixel-width-ignore . 77) (min-pixel-height-safe . 42) (min-pixel-width-safe . 22)) vc (pixel-width . 2100) (pixel-height . 1225) (total-width . 191) (total-height . 58) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 2100) (pixel-height . 630) (total-width . 191) (total-height . 30) (normal-height . 0.5142857142857142) (normal-width . 1.0) (buffer "init.el" (selected . t) (hscroll . 0) (fringes 8 8 nil) (margins 3) (scroll-bars nil 0 t nil 0 t) (vscroll . 0) (dedicated) (point . 610) (start . 1))) (leaf (last . t) (pixel-width . 2100) (pixel-height . 595) (total-width . 191) (total-height . 28) (normal-height . 0.4857142857142857) (normal-width . 1.0) (buffer "textConverter.ts" (selected) (hscroll . 0) (fringes 8 8 nil) (margins 2) (scroll-bars nil 0 t nil 0 t) (vscroll . 0) (dedicated) (point . 221) (start . 1)))))])
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring '("desk" "nord" "LIST_ITEM" "LIS" "TABLE"))
+(setq regexp-search-ring nil)
+(setq register-alist nil)
+(setq file-name-history '("c:/cppdocs/addon/src/server/contentStore/htmlConverter/converters/imageConverter.ts" "c:/cppdocs/addon/node_modules/@types/google-apps-script/google-apps-script.document.d.ts"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 208
+  "c:/Users/RYOLSON/dotfiles/emacs/init.el"
+  "init.el"
+  'emacs-lisp-mode
+  '(company-mode which-key-mode editorconfig-mode projectile-mode)
+  610
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode . t) (buffer-file-coding-system . prefer-utf-8-dos))
+  '((mark-ring (827 3052 1 3316 1 3316 3316 1371 3052))))
+
+(desktop-create-buffer 208
+  "c:/Users/RYOLSON/dotfiles/emacs/custom.el"
+  "custom.el"
+  'emacs-lisp-mode
+  '(company-mode which-key-mode editorconfig-mode projectile-mode)
+  806
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode . t) (buffer-file-coding-system . prefer-utf-8-dos))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "c:/cppdocs/addon/src/server/contentStore/htmlConverter/converters/imageConverter.ts"
+  "imageConverter.ts"
+  'typescript-mode
+  '(eldoc-mode company-mode which-key-mode editorconfig-mode prettier-js-mode projectile-mode flycheck-mode tide-mode)
+  349
+  '(399 nil)
+  nil
+  nil
+  '((tab-width . 2) (indent-tabs-mode) (buffer-file-coding-system . utf-8-dos))
+  '((mark-ring (399 300 1 399 399 399 399 349))))
+
+(desktop-create-buffer 208
+  "c:/cppdocs/addon/src/server/contentStore/htmlConverter/converters/textConverter.ts"
+  "textConverter.ts"
+  'typescript-mode
+  '(eldoc-mode company-mode which-key-mode editorconfig-mode prettier-js-mode projectile-mode flycheck-mode tide-mode)
+  221
+  '(431 nil)
+  nil
+  nil
+  '((tab-width . 2) (indent-tabs-mode) (buffer-file-coding-system . utf-8-dos))
+  '((mark-ring (1 901 430 129 300 901))))
+
+(desktop-create-buffer 208
+  "c:/cppdocs/addon/node_modules/@types/google-apps-script/google-apps-script.document.d.ts"
+  "google-apps-script.document.d.ts"
+  'typescript-mode
+  '(eldoc-mode company-mode which-key-mode editorconfig-mode prettier-js-mode projectile-mode flycheck-mode tide-mode)
+  14870
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 2) (indent-tabs-mode) (buffer-file-coding-system . utf-8-dos))
+  '((mark-ring (14932 14870))))
+
+(desktop-create-buffer 208
+  "c:/cppdocs/addon/node_modules/@types/google-apps-script/google-apps-script.base.d.ts"
+  "google-apps-script.base.d.ts"
+  'typescript-mode
+  '(eldoc-mode company-mode which-key-mode editorconfig-mode prettier-js-mode projectile-mode flycheck-mode tide-mode)
+  6908
+  '(1 nil)
+  nil
+  nil
+  '((tab-width . 2) (indent-tabs-mode) (buffer-file-coding-system . utf-8-dos))
+  '((mark-ring (7041 255))))
+
+(desktop-create-buffer 208
+  nil
+  "tide-20180420.431"
+  'dired-mode
+  '(company-mode which-key-mode editorconfig-mode projectile-mode)
+  617
+  '(617 nil)
+  t
+  '("c:/Users/RYOLSON/.emacs.d/elpa/tide-20180420.431/")
+  nil
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "c:/cppdocs/addon/src/server/contentStore/htmlConverter/interfaces/IHtmlConverter.ts"
+  "IHtmlConverter.ts"
+  'typescript-mode
+  '(eldoc-mode company-mode which-key-mode editorconfig-mode prettier-js-mode projectile-mode flycheck-mode tide-mode)
+  120
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 2) (indent-tabs-mode) (buffer-file-coding-system . utf-8-dos))
+  '((mark-ring nil)))
+

@@ -23,6 +23,8 @@
 (show-paren-mode t)
 (electric-pair-mode t)
 (fset 'yes-or-no-p 'y-or-n-p)
+;;(desktop-save-mode t)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
 (setq frame-title-format "emacs"
       inhibit-splash-screen t
@@ -34,11 +36,56 @@
 
 (load custom-file)
 
+(defun open-eshell-below (new)
+  (interactive)
+  (let ((w (split-window-below -10)))
+    (select-window w)
+    (let ((eshell-buffer (eshell new)))
+      (switch-to-buffer eshell-buffer))))
+
+(global-set-key (kbd "C-x m") (lambda () (interactive) (open-eshell-below nil)))
+(global-set-key (kbd "C-x M") (lambda () (interactive) (open-eshell-below t)))
+
+;; Font size
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+
 ;;(use-package challenger-deep-theme :ensure t)
 ;;(use-package monokai-theme :ensure t)
 ;;(use-package material-theme :ensure t :config (load-theme 'material 'no-confirm))
 ;;(use-package arjen-grey-theme :ensure t)
-(use-package nord-theme :ensure t)
+;;(use-package nord-theme :ensure t :config (load-theme 'nord 'no-confirm))
+;;(use-package doneburn-theme :ensure t :config (load-theme 'doneburn 'no-confirm))
+;;(use-package base16-theme
+;;  :ensure t
+;;  :config
+;;  (load-theme 'base16-eighties t))
+(use-package solarized-theme
+  :ensure t
+  :config
+  (setq solarized-use-less-bold t)
+  (load-theme 'solarized-light 'no-confirm)
+
+  ;; get rid of bolds
+  (set-face-attribute 'font-lock-constant-face nil :weight 'normal)
+
+  ;; custom faces for modes
+  (defface import-module-face
+    '((t (:foreground "#dc322f")))
+    "Face for the import, from, and as keywords in module import"
+    :group 'typescript-color-faces)
+  
+  (font-lock-add-keywords
+   'typescript-mode
+   '(("import" . 'import-module-face)
+     ("from" . 'import-module-face))))
+
+
+
+
+
+;;(use-package zenburn-theme
+;;  :ensure t)
 
 (use-package company
   :ensure t
@@ -73,7 +120,7 @@
       (flycheck-mode t)
       (eldoc-mode t)
       (company-mode t)
-      (tide-hl-identifier-mode t)
+      (tide-hl-identifier-mode nil)
       (setq flycheck-idle-change-delay 2)
       (setq flycheck-check-syntax-automatically '(save mode-enabled idle-change))
       (setup-typescript-keybindings))))
@@ -106,6 +153,12 @@
   :config
   (ido-mode t))
 
+(use-package smex
+  :ensure t
+  :config
+  (global-set-key (kbd "M-x") 'smex)
+  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command))
+
 ;; https://www.reddit.com/r/emacs/comments/51lqn9/helm_or_ivy/
 (use-package ivy
   :disabled t
@@ -128,3 +181,49 @@
   :config
   (projectile-mode))
   ;;(setq projectile-completion-system 'ivy))
+
+(use-package engine-mode
+  :ensure t
+  :config
+  (engine-mode t)
+  (defengine duckduckgo
+    "https://duckduckgo.com/?q=%s"
+    :keybinding "d")
+  (defengine appsscript
+    "https://developers.google.com/s/results/?q=%s&p=/apps-script/"
+    :keybinding "a")
+  (defengine github
+    "https://github.com/search?utf8=✓&q=%s&type="
+    :keybinding "g"))
+
+(use-package magit
+  :ensure t
+  :bind ("C-c g" . magit))
+
+(use-package expand-region
+  :ensure t
+  :bind ("C-=" . er/expand-region))
+
+;; org mode
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+
+(defun compilation-finished (buffer msg)
+  (remove-hook 'compilation-finish-functions 'compilation-finished)
+  (if (string-match "^finished" msg)
+      (progn
+	(delete-windows-on buffer)
+	(tooltip-show "\n Compiled successfully! :)"))
+    (tooltip-show "\n Compile failed.. :("))
+  (setq current-frame (car (car (cdr (current-frame-configuration)))))
+  (select-frame-set-input-focus current-frame)
+  (call-process "echo ^G"))
+
+(defun deploy-addon ()
+  (interactive)
+  (compile "npm run deploy-addon:local" t)
+  (add-hook 'compilation-finish-functions 'compilation-finished))
+
+(global-set-key (kbd "C-c C-t r") 'deploy-addon)
