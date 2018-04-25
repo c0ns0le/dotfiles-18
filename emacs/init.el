@@ -17,6 +17,9 @@
 (when is-windows
   (set-frame-font "Hack 11" nil t))
 
+(when (not is-windows)
+  (set-frame-font "Hack 12" nil t))
+
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
@@ -80,12 +83,13 @@
    '(("import" . 'import-module-face)
      ("from" . 'import-module-face))))
 
-
-
-
-
-;;(use-package zenburn-theme
-;;  :ensure t)
+(use-package zenburn-theme
+  :ensure t
+  :config
+  (set-face-attribute 'fringe nil :background nil)
+  (set-face-attribute 'linum nil :foreground "#90907e")
+  (set-face-attribute 'font-lock-keyword-face nil :weight 'normal)
+  (set-face-attribute 'font-lock-builtin-face nil :weight 'normal))
 
 (use-package company
   :ensure t
