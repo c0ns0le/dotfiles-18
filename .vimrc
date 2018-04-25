@@ -11,8 +11,8 @@ packadd minpac
 
 filetype plugin indent on
 syntax on
-set background=dark
-colo gruvbox8_soft
+set background=light
+colo solarized8_light
 
 set noshowmode
 set nojoinspaces
@@ -63,7 +63,7 @@ let airline#extensions#whitespace#enabled = 0
 call minpac#add('ryanolsonx/gruvbox-airline-theme', {'type': 'opt'})
 
 call minpac#add('vim-airline/vim-airline-themes', {'type': 'opt'})
-let g:airline_theme='gruvbox'
+"let g:airline_theme='gruvbox'
 
 call minpac#add('mattn/emmet-vim')
 call minpac#add('lunaru/vim-less')
@@ -132,7 +132,9 @@ nnoremap <leader><leader> :set nohlsearch<CR>
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
-noremap <c-l> <c-w>l
+nnoremap <c-l> <c-w>l
+inoremap <c-Space> <c-x><c-o>
+
 nmap <leader>tt :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
