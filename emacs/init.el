@@ -64,6 +64,7 @@
 ;;  :config
 ;;  (load-theme 'base16-eighties t))
 (use-package solarized-theme
+  :disabled t
   :ensure t
   :config
   (setq solarized-use-less-bold t)
@@ -207,6 +208,12 @@
 (use-package expand-region
   :ensure t
   :bind ("C-=" . er/expand-region))
+
+(use-package less-css-mode
+  :ensure t)
+
+(use-package elm-mode
+  :ensure t)
 
 ;; org mode
 (global-set-key "\C-cl" 'org-store-link)
