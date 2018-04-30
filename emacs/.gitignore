@@ -4,3 +4,6 @@ eshell
 *.eld
 recentf
 *.last
+server
+smex-items
+ido.last~

@@ -1,3 +1,7 @@
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+
 (require 'package)
 (package-initialize)
 
@@ -20,10 +24,8 @@
 (when (not is-windows)
   (set-frame-font "Hack 12" nil t))
 
-(tool-bar-mode -1)
-(menu-bar-mode -1)
-(scroll-bar-mode -1)
 (show-paren-mode t)
+(pending-delete-mode t)
 (electric-pair-mode t)
 (fset 'yes-or-no-p 'y-or-n-p)
 ;;(desktop-save-mode t)
@@ -49,6 +51,8 @@
 (global-set-key (kbd "C-x m") (lambda () (interactive) (open-eshell-below nil)))
 (global-set-key (kbd "C-x M") (lambda () (interactive) (open-eshell-below t)))
 
+(global-set-key (kbd "C-c v") 'eval-buffer)
+
 ;; Font size
 (global-set-key (kbd "C-+") 'text-scale-increase)
 (global-set-key (kbd "C--") 'text-scale-decrease)
@@ -68,7 +72,7 @@
   :ensure t
   :config
   (setq solarized-use-less-bold t)
-  (load-theme 'solarized-light 'no-confirm)
+  (load-theme 'solarized-dark 'no-confirm)
 
   ;; get rid of bolds
   (set-face-attribute 'font-lock-constant-face nil :weight 'normal)
@@ -83,6 +87,11 @@
    'typescript-mode
    '(("import" . 'import-module-face)
      ("from" . 'import-module-face))))
+
+(use-package nlinum
+  :ensure t
+  :config
+  (global-nlinum-mode t))
 
 (use-package zenburn-theme
   :ensure t
@@ -130,6 +139,8 @@
       (setq flycheck-check-syntax-automatically '(save mode-enabled idle-change))
       (setup-typescript-keybindings))))
 
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
+
 (use-package editorconfig
   :ensure t
   :diminish
@@ -145,12 +156,8 @@
   :config
   (add-hook 'typescript-mode-hook 'prettier-js-mode))
 
-(use-package nlinum
-  :ensure t
-  :config
-  (global-nlinum-mode t))
-
 (use-package ido
+  :disabled t
   :init
   (setq ido-enable-flex-matching t
 	ido-everywhere t
@@ -159,6 +166,7 @@
   (ido-mode t))
 
 (use-package smex
+  :disabled t
   :ensure t
   :config
   (global-set-key (kbd "M-x") 'smex)
@@ -166,7 +174,6 @@
 
 ;; https://www.reddit.com/r/emacs/comments/51lqn9/helm_or_ivy/
 (use-package ivy
-  :disabled t
   :ensure t
   :diminish
   :config
@@ -184,8 +191,8 @@
 (use-package projectile
   :ensure t
   :config
-  (projectile-mode))
-  ;;(setq projectile-completion-system 'ivy))
+  (projectile-mode)
+  (setq projectile-completion-system 'ivy))
 
 (use-package engine-mode
   :ensure t
@@ -215,11 +222,29 @@
 (use-package elm-mode
   :ensure t)
 
+(use-package npm-mode
+  :ensure t)
+
+(use-package markdown-mode
+  :ensure t)
+
+(use-package elpy
+  :ensure t
+  :config
+  (elpy-enable))
+
 ;; org mode
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
+(setq org-todo-keywords
+      '((sequence "TODO" "IN PROGRESS" "DONE")))
+
+(defun setup-org-mode ()
+  (nlinum-mode nil))
+
+(add-hook 'org-mode-hook 'setup-org-mode)
 
 (defun compilation-finished (buffer msg)
   (remove-hook 'compilation-finish-functions 'compilation-finished)
