@@ -1,0 +1,7 @@
+#+TITLE: EMACS Configuration
+#+AUTHOR: Ryan Olson
+#+EMAIL: ryanolson@pm.me
+
+#+BEGIN_SRC emacs-lisp
+(message "hello world")
+#+END_SRC

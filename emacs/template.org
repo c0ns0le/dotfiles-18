@@ -1,0 +1,169 @@
+#+TITLE: An Emacs Config
+#+AUTHOR: Ryan Olson
+#+EMAIL: ryanolson@pm.me
+
+* Intro
+
+Hello! This is my literately programmed emacs config file.
+
+
+* Early bootstrap
+
+I hide these things early on so that there isn't a strange flash where these things are shown and then hidden.
+
+I like to hide these things (as I find them distracting). If I need something from the menu, I just use menu-bar-mode to enable it.
+
+#+BEGIN_SRC emacs-lisp
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+#+END_SRC
+
+
+* Package setup
+
+#+BEGIN_SRC emacs-lisp
+(require 'package)
+(package-initialize)
+
+(defvar is-windows (eq system-type 'windows-nt))
+
+(if is-windows
+    (add-to-list 'package-archives
+                 '("melpa" . "http://melpa.org/packages/") t)
+  (add-to-list 'package-archives
+	       '("melpa" . "https://melpa.org/packages/") t))
+
+;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+#+END_SRC
+
+
+* Appearance
+
+Font
+
+#+BEGIN_SRC emacs-lisp
+  (if is-windows
+      (set-frame-font "Hack 11" nil t)
+    (set-frame-font "Hack 12" nil t))
+#+END_SRC
+
+Line numbers. These are setup early on so that they can be themed.
+
+#+BEGIN_SRC emacs-lisp
+(use-package nlinum
+  :ensure t
+  :config
+  (global-nlinum-mode t))
+#+END_SRC
+
+** Themes
+
+#+BEGIN_SRC emacs-lisp
+;;(use-package challenger-deep-theme :ensure t)
+;;(use-package monokai-theme :ensure t)
+;;(use-package material-theme :ensure t :config (load-theme 'material 'no-confirm))
+;;(use-package arjen-grey-theme :ensure t)
+;;(use-package nord-theme :ensure t :config (load-theme 'nord 'no-confirm))
+;;(use-package doneburn-theme :ensure t :config (load-theme 'doneburn 'no-confirm))
+;;(use-package base16-theme
+;;  :ensure t
+;;  :config
+;;  (load-theme 'base16-eighties t))
+(use-package solarized-theme
+  :disabled t
+  :ensure t
+  :config
+  (setq solarized-use-less-bold t)
+  (load-theme 'solarized-dark 'no-confirm)
+
+  ;; get rid of bolds
+  (set-face-attribute 'font-lock-constant-face nil :weight 'normal)
+
+  ;; custom faces for modes
+  (defface import-module-face
+    '((t (:foreground "#dc322f")))
+    "Face for the import, from, and as keywords in module import"
+    :group 'typescript-color-faces)
+  
+  (font-lock-add-keywords
+   'typescript-mode
+   '(("import" . 'import-module-face)
+     ("from" . 'import-module-face))))
+
+(use-package color-theme-sanityinc-tomorrow
+  :ensure t
+  :config
+  (load-theme 'sanityinc-tomorrow-eighties 'no-confirm))
+
+(use-package zenburn-theme
+  :disabled t
+  :ensure t
+  :config
+  (set-face-attribute 'fringe nil :background nil)
+  (set-face-attribute 'linum nil :foreground "#90907e")
+  (set-face-attribute 'font-lock-keyword-face nil :weight 'normal)
+  (set-face-attribute 'font-lock-builtin-face nil :weight 'normal))
+#+END_SRC
+
+
+* Defaults
+
+My better defaults
+
+#+BEGIN_SRC emacs-lisp
+(show-paren-mode t)
+(pending-delete-mode t)
+(electric-pair-mode t)
+(fset 'yes-or-no-p 'y-or-n-p)
+;;(desktop-save-mode t)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+
+(setq frame-title-format "emacs"
+      inhibit-splash-screen t
+      inhibit-startup-screen t
+      custom-file "~/.emacs.d/custom.el"
+      make-backup-files nil
+      auto-save-default nil)
+
+
+(load custom-file)
+#+END_SRC
+
+
+* Languages
+
+** Org
+
+This config is in org mode.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package org
+    :preface
+    (defun org-setup ()
+      (visual-line-mode t)
+      (nlinum-mode -1)
+      (org-indent-mode))
+    :init
+    (add-hook 'org-mode-hook 'org-setup)
+    :config
+    (setq org-confirm-babel-evaluate nil
+          org-src-fontify-natively t
+          org-src-tab-acts-natively t
+          org-todo-keywords
+          '((sequence "TODO" "IN PROGRESS" "FOLLOW-UP" "DONE"))))
+#+END_SRC
+
+*** Improve bullets
+
+#+BEGIN_SRC emacs-lisp
+  (use-package org-bullets
+    :ensure t
+    :init
+    ;;(setq org-bullets-bullet-list '("●"))
+    (add-hook 'org-mode-hook #'org-bullets-mode))
+#+END_SRC
