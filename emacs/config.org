@@ -2,6 +2,16 @@
 #+AUTHOR: Ryan Olson
 #+EMAIL: ryanolson@pm.me
 #+LANGUAGE: en
+#+PROPERTY: header-args :tangle yes
+
+* Tangle All
+
+Tangles every code block unless otherwise specified.
+
+#+BEGIN_SRC :tangle no
+header-args :tangle yes
+#+END_SRC
+
 
 * Package Setup
 
@@ -85,12 +95,14 @@
 * Appearance
 
 ** Font
+
 #+BEGIN_SRC emacs-lisp
-  (set-frame-font "Hack 10" nil t)
+  (set-frame-font "Fira Code 10" nil t)
 #+END_SRC
 
 
 ** Line Numbers
+
 #+BEGIN_SRC emacs-lisp
   (global-nlinum-mode t)
 #+END_SRC
@@ -111,6 +123,9 @@
   (setq solarized-use-less-bold t)
   (load-theme 'solarized-dark 'no-confirm)
 #+END_SRC
+
+#+RESULTS:
+: t
 
 ** No Scrollbar
 #+BEGIN_SRC emacs-lisp
@@ -441,7 +456,9 @@ In source code blocks, it'll use tabs configured for that language.
 
 #+BEGIN_SRC emacs-lisp
   (defun setup-org ()
-    (visual-line-mode))
+    (visual-line-mode)
+    (org-indent-mode)
+    (nlinum-mode -1))
 
   (add-hook 'org-mode-hook 'setup-org)
 #+END_SRC
