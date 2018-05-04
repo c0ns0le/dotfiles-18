@@ -494,5 +494,6 @@ Allows quick access to commands.
 Auto format using prettier js.
 
 #+BEGIN_SRC emacs-lisp
+  (require 'prettier-js)
   (add-hook 'typescript-mode-hook 'prettier-js-mode)
 #+END_SRC
