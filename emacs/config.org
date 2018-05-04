@@ -1,7 +1,498 @@
 #+TITLE: EMACS Configuration
 #+AUTHOR: Ryan Olson
 #+EMAIL: ryanolson@pm.me
+#+LANGUAGE: en
+
+* Package Setup
 
 #+BEGIN_SRC emacs-lisp
-(message "hello world")
+  (require 'package)
+  (package-initialize)
+
+  (defvar is-windows (eq system-type 'windows-nt))
+
+  (if is-windows
+      (add-to-list 'package-archives
+                   '("melpa" . "http://melpa.org/packages/") t)
+    (add-to-list 'package-archives
+                 '("melpa" . "https://melpa.org/packages/") t))
+
+  (prefer-coding-system 'utf-8)
+  (package-refresh-contents)
+#+END_SRC
+
+
+* Performance
+
+#+BEGIN_SRC emacs-lisp
+  (setq gc-cons-threshold 50000000)
+#+END_SRC
+
+
+* General
+
+** No bell
+
+#+BEGIN_SRC emacs-lisp
+  (setq ring-bell-function 'ignore)
+#+END_SRC
+
+
+** Show Parens Match
+
+#+BEGIN_SRC emacs-lisp
+  (show-paren-mode t)
+#+END_SRC
+
+** Custom File
+
+#+BEGIN_SRC emacs-lisp
+  (setq custom-file "~/.emacs.d/custom.el")
+  (load custom-file)
+#+END_SRC
+
+
+** No save files
+
+#+BEGIN_SRC emacs-lisp
+  (setq custom-file "~/.emacs.d/custom.el"
+        make-backup-files nil
+        auto-save-default nil)
+#+END_SRC
+
+
+** Replace Selection
+
+#+BEGIN_SRC emacs-lisp
+  (pending-delete-mode t)
+#+END_SRC
+
+
+** Window Title
+
+#+BEGIN_SRC emacs-lisp
+  (setq frame-title-format "emacs")
+#+END_SRC
+
+
+** Y or N
+
+#+BEGIN_SRC emacs-lisp
+  (fset 'yes-or-no-p 'y-or-n-p)
+#+END_SRC
+
+
+* Appearance
+
+** Font
+#+BEGIN_SRC emacs-lisp
+  (set-frame-font "Hack 10" nil t)
+#+END_SRC
+
+
+** Line Numbers
+#+BEGIN_SRC emacs-lisp
+  (global-nlinum-mode t)
+#+END_SRC
+
+
+** Color Theme
+
+I like to switch themes a lot but right now, I'm =really= digging Tomorrow Eighties.
+
+#+BEGIN_SRC emacs-lisp
+  (load-theme 'sanityinc-tomorrow-eighties 'no-confirm)
+#+END_SRC
+
+
+** No Scrollbar
+#+BEGIN_SRC emacs-lisp
+  (scroll-bar-mode -1)
+#+END_SRC
+
+
+** No Toolbar
+#+BEGIN_SRC emacs-lisp
+  (tool-bar-mode -1)
+#+END_SRC
+
+
+** No annoying intro things
+
+#+BEGIN_SRC emacs-lisp
+  (setq inhibit-splash-screen t
+        inhibit-startup-screen t)
+#+END_SRC
+
+
+* Misc Keybindings
+
+** Changing Font Size
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-+") 'text-scale-increase)
+  (global-set-key (kbd "C--") 'text-scale-decrease)
+#+END_SRC
+
+
+** Eshell
+
+#+BEGIN_SRC emacs-lisp
+  (defun open-eshell-below (new)
+    (interactive)
+    (let ((w (split-window-below -10)))
+      (select-window w)
+      (let ((eshell-buffer (eshell new)))
+        (switch-to-buffer eshell-buffer))))
+
+  (defun open-eshell-below-reuse ()
+    (interactive)
+    (open-eshell-below nil))
+
+  (defun open-eshell-below-brand-new ()
+    (interactive)
+    (open-eshell-below t))
+
+  (defun open-eshell-full ()
+    (interactive)
+    (eshell))
+
+  (global-set-key (kbd "C-c m m") 'open-eshell-below-reuse)
+  (global-set-key (kbd "C-c m M") 'open-eshell-below-brand-new)
+  (global-set-key (kbd "C-c m f") 'open-eshell-full)
+#+END_SRC
+
+
+** Evaluate Buffer
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-c v") 'eval-buffer)
+#+END_SRC
+
+
+* Company
+
+Company is used for autocomplete, everywhere. It's pretty awesome.
+
+#+BEGIN_SRC emacs-lisp
+(global-company-mode)
+#+END_SRC
+
+** Show Annotations on Right
+
+#+BEGIN_SRC emacs-lisp
+  (setq company-tooltip-align-annotations t)
+#+END_SRC
+
+
+* Which Key
+
+Allows you to see what commands are next in a key chord.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'which-key)
+  (which-key-mode)
+#+END_SRC
+
+
+* YaSnippet
+
+Snippets for everything.
+
+#+BEGIN_SRC emacs-lisp
+  (require 'yasnippet)
+  (yas-global-mode t)
+#+END_SRC
+
+
+* Ivy
+
+https://www.reddit.com/r/emacs/comments/51lqn9/helm_or_ivy/
+
+#+BEGIN_SRC emacs-lisp
+  (ivy-mode 1)
+#+END_SRC
+
+
+** Display
+
+#+BEGIN_SRC emacs-lisp
+  (setq ivy-count-format ""
+        ivy-display-style nil
+        ivy-minibuffer-faces nil)
+#+END_SRC
+
+
+** Fuzzy Finding
+
+#+BEGIN_SRC emacs-lisp
+  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+#+END_SRC
+
+
+** Key Bindings
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-c C-r") 'ivy-resume)
+#+END_SRC
+
+
+*** Select Directory Stays in Ivy
+
+#+BEGIN_SRC emacs-lisp
+  (define-key ivy-minibuffer-map (kbd "C-m") 'ivy-alt-done)
+#+END_SRC
+
+
+* Swiper
+
+Improved Search.
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-s") 'swiper)
+#+END_SRC
+
+
+* Counsel
+
+Ivy improvements for many functions.
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+#+END_SRC
+
+
+* Projectile
+
+#+BEGIN_SRC emacs-lisp
+  (require 'projectile)
+
+  (projectile-mode)
+  (setq projectile-completion-system 'ivy)
+#+END_SRC
+
+
+* Magit
+
+#+BEGIN_SRC emacs-lisp
+  (require 'magit)
+#+END_SRC
+
+
+** Key Bindings
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x g") 'magit)
+#+END_SRC
+
+
+* Expand Region
+
+#+BEGIN_SRC emacs-lisp
+  (require 'expand-region)
+#+END_SRC
+
+
+** Key Bindings
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-=") 'er/expand-region)
+#+END_SRC
+
+
+* Engine Mode
+
+#+BEGIN_SRC emacs-lisp
+  (require 'engine-mode)
+  (engine-mode t)
+#+END_SRC
+
+
+** DuckDuckGo
+
+Search DuckDuckGo search engine.
+
+#+BEGIN_SRC emacs-lisp
+  (defengine duckduckgo
+    "https://duckduckgo.com/?q=%s"
+    :keybinding "d")
+#+END_SRC
+
+
+** Apps Script
+
+Search apps script documentation reference.
+
+#+BEGIN_SRC emacs-lisp
+  (defengine appsscript
+    "https://developers.google.com/s/results/?q=%s&p=/apps-script/"
+    :keybinding "a")
+#+END_SRC
+
+
+** Github Simple Search
+
+Search github repositories.
+
+#+BEGIN_SRC emacs-lisp
+  (defengine github
+    "https://github.com/search?utf8=✓&q=%s&type="
+    :keybinding "g")
+#+END_SRC
+
+
+** Melpa
+
+Search Melpa emacs packages repository.
+
+#+BEGIN_SRC emacs-lisp
+  (defengine melpa
+    "http://melpa.org/#/?q=%s"
+    :keybinding "m")
+#+END_SRC
+
+
+* Mode Line
+
+** Diminished
+
+#+BEGIN_SRC emacs-lisp
+  (require 'diminish)
+
+  (diminish 'visual-line-mode)
+  (diminish 'which-key-mode)
+  (diminish 'editorconfig-mode)
+  (diminish 'ivy-mode)
+  (diminish 'npm-mode)
+#+END_SRC
+
+** Delighting
+
+#+BEGIN_SRC emacs-lisp
+  (require 'delight)
+
+  (delight 'emacs-lisp-mode "λ" :major)
+#+END_SRC
+
+
+* Languages
+
+** All
+
+*** EditorConfig
+
+#+BEGIN_SRC emacs-lisp
+  (editorconfig-mode)
+#+END_SRC
+
+
+** Python
+
+*** Elpy
+
+#+BEGIN_SRC emacs-lisp
+  (elpy-enable)
+#+END_SRC
+
+
+** Org
+
+*** Color Source Code
+
+Whenever we're looking at an org source block, we should color it.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-src-fontify-natively t)
+#+END_SRC
+
+
+*** Easy Source Code Block Evaluation
+
+No confirm on evaluating org code blocks.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-confirm-babel-evaluate nil)
+#+END_SRC
+
+
+*** Tabs in Source Code
+
+In source code blocks, it'll use tabs configured for that language.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-src-tab-acts-natively t)
+#+END_SRC
+
+
+*** Setup
+
+#+BEGIN_SRC emacs-lisp
+  (defun setup-org ()
+    (visual-line-mode))
+
+  (add-hook 'org-mode-hook 'setup-org)
+#+END_SRC
+
+
+*** Todo
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-todo-keywords
+        '((sequence "TODO" "IN PROGRESS" "DONE")))
+#+END_SRC
+
+
+*** SH
+
+  (use-package ob-sh
+    :config
+    (defadvice org-babel-sh-execute (around set-shell activate)
+      "Add header argument :shcmd that determines which shell to call."
+      (let* ((org-babel-sh-command (or (cdr (assoc :shcmd params)) org-babel-sh-command)))
+	ad-do-it)))
+
+
+** TypeScript
+
+*** TIDE
+
+Awesome typescript package.
+
+#+BEGIN_SRC emacs-lisp
+  (defun setup-typescript-keybindings ()
+    (define-key typescript-mode-map [f12] 'tide-goto-reference)
+    (define-key typescript-mode-map [f11] 'tide-references)
+    (define-key typescript-mode-map [f2] 'tide-rename-symbol))
+
+  (defun setup-tide-mode ()
+    (interactive)
+    (tide-setup)
+    (flycheck-mode t)
+    (eldoc-mode t)
+    (company-mode t)
+    (tide-hl-identifier-mode nil)
+    (setq flycheck-idle-change-delay 2)
+    (setq flycheck-check-syntax-automatically '(save mode-enabled idle-change))
+    (setup-typescript-keybindings))
+
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
+  (add-hook 'typescript-mode-hook 'setup-tide-mode)
+#+END_SRC
+
+
+*** NPM
+
+Allows quick access to commands.
+
+#+BEGIN_SRC emacs-lisp
+  (npm-global-mode t)
+#+END_SRC
+
+
+*** Prettier JS
+
+Auto format using prettier js.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'typescript-mode-hook 'prettier-js-mode)
 #+END_SRC
