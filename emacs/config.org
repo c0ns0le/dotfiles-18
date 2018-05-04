@@ -98,18 +98,31 @@
 
 ** Color Theme
 
-I like to switch themes a lot but right now, I'm =really= digging Tomorrow Eighties.
+*** Tomorrow Eighties
 
 #+BEGIN_SRC emacs-lisp
-  (load-theme 'sanityinc-tomorrow-eighties 'no-confirm)
+  ;(load-theme 'sanityinc-tomorrow-eighties 'no-confirm)
 #+END_SRC
 
+
+*** Solarized
+
+#+BEGIN_SRC emacs-lisp
+  (setq solarized-use-less-bold t)
+  (load-theme 'solarized-dark 'no-confirm)
+#+END_SRC
 
 ** No Scrollbar
 #+BEGIN_SRC emacs-lisp
   (scroll-bar-mode -1)
 #+END_SRC
 
+
+** No Menubar
+
+#+BEGIN_SRC emacs-lisp
+  (menu-bar-mode -1)
+#+END_SRC
 
 ** No Toolbar
 #+BEGIN_SRC emacs-lisp
