@@ -1,0 +1,15 @@
+"*":
+  core:
+    disabledPackages: [
+      "wrap-guide"
+    ]
+    telemetryConsent: "limited"
+    themes: [
+      "one-dark-ui"
+      "base16-tomorrow-dark-theme"
+    ]
+    uriHandlerRegistration: "always"
+  "exception-reporting":
+    userId: "df98affc-49e3-4517-b97b-2c4ce6338040"
+  welcome:
+    showOnStartup: false
