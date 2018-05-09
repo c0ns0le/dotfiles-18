@@ -17,10 +17,11 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 " Color schemes
 Plug 'lifepillar/vim-gruvbox8'
 Plug 'lifepillar/vim-solarized8'
+Plug 'arcticicestudio/nord-vim'
 
 " Status Bar
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -99,7 +100,7 @@ set number
 set hidden
 syntax on
 filetype plugin indent on
-set clipboard=unnamed
+"set clipboard=unnamed
 set backspace=indent,eol,start
 set tabstop=2
 set shiftwidth=2
@@ -113,8 +114,7 @@ set noswapfile
 
 " Color theme
 " --
-set background=dark
-colo solarized8
+colo nord
 
 " Mappings
 " --
