@@ -2,6 +2,7 @@ set nocompatible
 
 " Plugins
 call plug#begin()
+
 " LSP
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/async.vim'
@@ -13,6 +14,11 @@ Plug 'leafgarland/typescript-vim'
 
 " Color schemes
 Plug 'lifepillar/vim-gruvbox8'
+Plug 'lifepillar/vim-solarized8'
+
+" Status Bar
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -24,17 +30,23 @@ call plug#end()
 " --
 
 "  LSP
-let g:lsp_log_verbose = 1
-let g:lsp_log_file = expand('~/vim-lsp.log')
+"let g:lsp_log_verbose = 1
+"let g:lsp_log_file = expand('~/vim-lsp.log')
+"let g:asyncomplete_log_file = expand('~/asyncomplete.log')
 let g:lsp_signs_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
-let g:asyncomplete_log_file = expand('~/asyncomplete.log')
 
 imap <c-space> <Plug>(asyncomplete_force_refresh)
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" Airline
+let g:airline_skip_empty_sections = 1
+let g:airline_section_y = ''
+let g:airline_powerline_fonts = 1
+let airline#extensions#whitespace#enabled = 0
 
 " TODO: make github repo called vim-lsp-python
 if executable('pyls')
@@ -78,7 +90,7 @@ set noswapfile
 " Color theme
 " --
 set background=dark
-colo gruvbox8
+colo solarized8
 
 " Mappings
 " --
