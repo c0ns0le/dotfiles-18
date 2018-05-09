@@ -2,14 +2,22 @@ set nocompatible
 
 " Plugins
 call plug#begin()
+" LSP
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/async.vim'
 Plug 'ryanolsonx/vim-lsp'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+" Languages
 Plug 'leafgarland/typescript-vim'
+
+" Color schemes
 Plug 'lifepillar/vim-gruvbox8'
+
+" Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter', { 'commit': '932ffac' }
+
 call plug#end()
 
 " Plugin Settings
@@ -72,12 +80,16 @@ set noswapfile
 set background=dark
 colo gruvbox8
 
+" Mappings
+" --
 let mapleader = ' '
 nnoremap <leader>x :source %<cr>
 nnoremap <leader>s :w<cr>
 nnoremap <leader>b :ls<cr>
 nnoremap <leader>p :PlugInstall<cr>
-nnoremap <leader>g :Gstatus<cr>
+nnoremap <leader>gg :Gstatus<cr>
+nnoremap <leader>gs :Gwrite<cr>
+nnoremap <leader>gc :Gcommit<cr>
 nnoremap <leader><leader> :set nohlsearch<cr>
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
@@ -85,5 +97,6 @@ nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 "vnoremap <leader>2 "xy:echo @x<cr>
 inoremap jj <esc>
+
 command! ProjectSearchVim -nargs=1 vimgrep /<args>/gj ./**/*.vim
 command! ProjectSearchTs -nargs=1 vimgrep /<args>/gj ./**/*.ts
