@@ -12,6 +12,7 @@ Plug 'ryanolsonx/ctrlp-projects.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/async.vim'
 Plug 'ryanolsonx/vim-lsp'
+Plug 'ryanolsonx/vim-lsp-typescript'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 " Color schemes
