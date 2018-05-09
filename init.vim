@@ -9,6 +9,7 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'lifepillar/vim-gruvbox8'
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter', { 'commit': '932ffac' }
 call plug#end()
 
 " Plugin Settings
@@ -76,6 +77,7 @@ nnoremap <leader>x :source %<cr>
 nnoremap <leader>s :w<cr>
 nnoremap <leader>b :ls<cr>
 nnoremap <leader>p :PlugInstall<cr>
+nnoremap <leader>g :Gstatus<cr>
 nnoremap <leader><leader> :set nohlsearch<cr>
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
