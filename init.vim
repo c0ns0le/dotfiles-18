@@ -3,6 +3,11 @@ set nocompatible
 " Plugins
 call plug#begin()
 
+" Navigation / File Exploration
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ryanolsonx/ctrlp-projects.vim'
+
 " LSP
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/async.vim'
@@ -42,12 +47,6 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
-" Airline
-let g:airline_skip_empty_sections = 1
-let g:airline_section_y = ''
-let g:airline_powerline_fonts = 1
-let airline#extensions#whitespace#enabled = 0
-
 " TODO: make github repo called vim-lsp-python
 if executable('pyls')
     " pip install python-language-server
@@ -68,6 +67,19 @@ if executable('typescript-language-server')
         \ 'whitelist': ['typescript'],
         \ })
 endif
+
+" Airline
+let g:airline_skip_empty_sections = 1
+let g:airline_section_y = ''
+let g:airline_powerline_fonts = 1
+let airline#extensions#whitespace#enabled = 0
+
+" CTRL P
+let g:ctrlp_max_height = 30
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_custom_ignore = '\v[\/](.*\.egg-info|venv|node_modules|__pycache__|target|dist)|(\.(swp|ico|git|svn))$'
+let g:ctrlp_extensions = ['projects']
 
 " Settings
 " --
@@ -99,6 +111,10 @@ nnoremap <leader>x :source %<cr>
 nnoremap <leader>s :w<cr>
 nnoremap <leader>b :ls<cr>
 nnoremap <leader>p :PlugInstall<cr>
+nnoremap <leader>n :NERDTreeToggle<cr>
+nnoremap <leader>f :CtrlP<cr>
+nnoremap <leader>b :CtrlPBuffer<cr>
+nnoremap <leader>c :CtrlPProjects<cr>
 nnoremap <leader>gg :Gstatus<cr>
 nnoremap <leader>gs :Gwrite<cr>
 nnoremap <leader>gc :Gcommit<cr>
