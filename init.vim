@@ -29,6 +29,11 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter', { 'commit': '932ffac' }
 
+" Utils
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-unimpaired'
+
 call plug#end()
 
 " Plugin Settings
