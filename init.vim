@@ -35,11 +35,11 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 
 " Programming
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets' 
+"Plug 'SirVer/ultisnips'
+"Plug 'honza/vim-snippets' 
 Plug 'mattn/emmet-vim'
 Plug 'sbdchd/neoformat'
-Plug 'editorconfig/editorconfig-vim'
+"Plug 'editorconfig/editorconfig-vim'
 
 " Languages
 Plug 'leafgarland/typescript-vim'
@@ -55,6 +55,8 @@ call plug#end()
 "let g:asyncomplete_log_file = expand('~/asyncomplete.log')
 let g:lsp_signs_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
+let g:asynccomplete_auto_popup = 1
+set completeopt+=preview
 
 imap <c-space> <Plug>(asyncomplete_force_refresh)
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -82,7 +84,7 @@ let airline#extensions#whitespace#enabled = 0
 let g:ctrlp_max_height = 30
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_custom_ignore = '\v[\/](.*\.egg-info|venv|node_modules|__pycache__|target|dist)|(\.(swp|ico|git|svn))$'
+let g:ctrlp_custom_ignore = '\v[\/](.*\.egg-info|venv|emacs|sublime|node_modules|__pycache__|target|dist)|(\.(swp|ico|git|svn))$'
 let g:ctrlp_extensions = ['projects']
 
 " Settings
@@ -119,7 +121,7 @@ augroup customize_colorscheme_group
   autocmd ColorScheme * call <SID>customize_colorscheme()
 augroup END
 
-call CustomizeColorscheme()
+call <SID>customize_colorscheme()
 
 " Mappings
 " --
@@ -143,5 +145,21 @@ nnoremap <c-l> <c-w>l
 "vnoremap <leader>2 "xy:echo @x<cr>
 inoremap jj <esc>
 
-command! ProjectSearchVim -nargs=1 vimgrep /<args>/gj ./**/*.vim
-command! ProjectSearchTs -nargs=1 vimgrep /<args>/gj ./**/*.ts
+" Language Mappings
+" --
+
+augroup language_mappings
+  autocmd!
+
+  " TypeScript
+  autocmd FileType typescript nnoremap <leader>h :LspHover<cr>
+  autocmd FileType typescript nnoremap <f2> :LspRename<cr>
+  autocmd FileType typescript nnoremap <f8> :LspDocumentDiagnostics<cr>
+  autocmd FileType typescript nnoremap <f10> :LspDocumentSymbol<cr>
+  autocmd FileType typescript nnoremap <f11> :LspReferences<cr>
+  autocmd FileType typescript nnoremap <f12> :LspDefinition<cr>
+  autocmd FileType typescript command! ProjectSearch -nargs=1 vimgrep /<args>/gj ./**/*.ts<cr>
+
+  " Vim
+  autocmd FileType vim command! ProjectSearch -nargs=1 vimgrep /<args>/gj ./**/*.vim<cr>
+augroup END
