@@ -13,6 +13,7 @@ Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/async.vim'
 Plug 'ryanolsonx/vim-lsp'
 Plug 'ryanolsonx/vim-lsp-typescript'
+Plug 'ryanolsonx/vim-lsp-python'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 " Color schemes
@@ -65,16 +66,6 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
-" TODO: make github repo called vim-lsp-python
-if executable('pyls')
-    " pip install python-language-server
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-endif
-
 " Airline
 let g:airline_skip_empty_sections = 1
 let g:airline_section_y = ''
@@ -83,7 +74,14 @@ let airline#extensions#whitespace#enabled = 0
 
 " Lightline
 let g:lightline = {
-  \ 'colorscheme': 'PaperColor'
+  \ 'colorscheme': 'PaperColor',
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+  \ },
+  \ 'component_function': {
+  \   'gitbranch': 'fugitive#head'
+  \ }
   \ }
 
 " CTRL P
@@ -107,6 +105,7 @@ set expandtab
 set wildmenu
 set signcolumn=yes
 set hlsearch
+set ignorecase
 set incsearch
 set nobackup
 set noswapfile
@@ -152,6 +151,7 @@ nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 "vnoremap <leader>2 "xy:echo @x<cr>
 inoremap jj <esc>
+tnoremap <esc> <c-\><c-n>
 
 " Language Mappings
 " --
