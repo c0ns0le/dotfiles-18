@@ -19,6 +19,7 @@ Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'lifepillar/vim-gruvbox8'
 Plug 'lifepillar/vim-solarized8'
 Plug 'arcticicestudio/nord-vim'
+Plug 'NLKNguyen/papercolor-theme'
 
 " Status Bar
 "Plug 'vim-airline/vim-airline'
@@ -72,15 +73,15 @@ if executable('pyls')
 endif
 
 " TODO: make github repo called vim-lsp-typescript (or vim-lsp-typescript-javascript)
-if executable('typescript-language-server')
-    " npm install -g typescript typescript-language-server
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'typescript-language-server',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server', '--stdio']},
-        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-        \ 'whitelist': ['typescript'],
-        \ })
-endif
+"if executable('typescript-language-server')
+"    " npm install -g typescript typescript-language-server
+"    au User lsp_setup call lsp#register_server({
+"        \ 'name': 'typescript-language-server',
+"        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server', '--stdio']},
+"        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+"        \ 'whitelist': ['typescript'],
+"        \ })
+"endif
 
 " Airline
 let g:airline_skip_empty_sections = 1
@@ -115,7 +116,21 @@ set noswapfile
 
 " Color theme
 " --
-colo nord
+set background=light
+colo PaperColor
+
+function! s:customize_colorscheme()
+  if g:colors_name == 'PaperColor'
+    hi! StatusLine guifg='#444444'
+  endif
+endfunction
+
+augroup customize_colorscheme_group
+  autocmd!
+  autocmd ColorScheme * call <SID>customize_colorscheme()
+augroup END
+
+call CustomizeColorscheme()
 
 " Mappings
 " --
