@@ -14,9 +14,6 @@ Plug 'prabirshrestha/async.vim'
 Plug 'ryanolsonx/vim-lsp'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
-" Languages
-Plug 'leafgarland/typescript-vim'
-
 " Color schemes
 Plug 'lifepillar/vim-gruvbox8'
 Plug 'lifepillar/vim-solarized8'
@@ -33,6 +30,16 @@ Plug 'airblade/vim-gitgutter', { 'commit': '932ffac' }
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
+
+" Programming
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets' 
+Plug 'mattn/emmet-vim'
+Plug 'sbdchd/neoformat'
+Plug 'editorconfig/editorconfig-vim'
+
+" Languages
+Plug 'leafgarland/typescript-vim'
 
 call plug#end()
 
@@ -115,7 +122,7 @@ let mapleader = ' '
 nnoremap <leader>x :source %<cr>
 nnoremap <leader>s :w<cr>
 nnoremap <leader>b :ls<cr>
-nnoremap <leader>p :PlugInstall<cr>
+nnoremap <leader>p :Neoformat<cr>
 nnoremap <leader>n :NERDTreeToggle<cr>
 nnoremap <leader>f :CtrlP<cr>
 nnoremap <leader>b :CtrlPBuffer<cr>
