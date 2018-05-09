@@ -24,6 +24,7 @@ Plug 'NLKNguyen/papercolor-theme'
 " Status Bar
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -80,6 +81,11 @@ let g:airline_section_y = ''
 let g:airline_powerline_fonts = 1
 let airline#extensions#whitespace#enabled = 0
 
+" Lightline
+let g:lightline = {
+  \ 'colorscheme': 'PaperColor'
+  \ }
+
 " CTRL P
 let g:ctrlp_max_height = 30
 let g:ctrlp_working_path_mode = 0
@@ -104,6 +110,7 @@ set hlsearch
 set incsearch
 set nobackup
 set noswapfile
+set laststatus=2
 
 " Color theme
 " --
@@ -119,6 +126,7 @@ endfunction
 augroup customize_colorscheme_group
   autocmd!
   autocmd ColorScheme * call <SID>customize_colorscheme()
+  autocmd ColorScheme * call lightline#update()
 augroup END
 
 call <SID>customize_colorscheme()
