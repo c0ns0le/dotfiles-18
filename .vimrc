@@ -7,6 +7,9 @@ if &compatible
   set nocompatible
 endif
 
+"set term=xterm
+set t_Co=256
+
 packadd minpac
 
 filetype plugin indent on
