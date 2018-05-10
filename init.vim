@@ -73,14 +73,43 @@ let g:airline_powerline_fonts = 1
 let airline#extensions#whitespace#enabled = 0
 
 " Lightline
+function! LightLineGitHunks()
+  let l:hunks = GitGutterGetHunkSummary()
+
+  let l:added = l:hunks[0]
+  let l:modified = l:hunks[1]
+  let l:removed = l:hunks[2]
+
+  if l:added == 0 && l:modified == 0 && l:removed == 0
+    return ''
+  endif
+
+  let l:displays = []
+
+  if l:added > 0
+    let l:displays = l:displays + ['+'.l:added]
+  endif
+
+  if l:modified > 0
+    let l:displays = l:displays + ['~'.l:modified]
+  endif
+
+  if l:removed > 0
+    let l:displays = l:displays + ['-'.l:removed]
+  endif
+
+  return join(l:displays, ' ')
+endfunction
+
 let g:lightline = {
   \ 'colorscheme': 'PaperColor',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+  \             [ 'gitbranch', 'githunks', 'readonly', 'filename', 'modified' ] ]
   \ },
   \ 'component_function': {
-  \   'gitbranch': 'fugitive#head'
+  \   'gitbranch': 'fugitive#head',
+  \   'githunks': 'LightLineGitHunks'
   \ }
   \ }
 
