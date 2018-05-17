@@ -1,15 +1,47 @@
 "*":
+  "atom-ide-ui":
+    "atom-ide-terminal":
+      black: "#f8f8f2"
+      blue: "#8be9fd"
+      brightBlack: "#f8f8f2"
+      brightBlue: "#8be9fd"
+      brightCyan: "#8be9fd"
+      brightGreen: "#50fa7b"
+      brightMagenta: "#ff79c6"
+      brightRed: "#ff5555"
+      brightWhite: "#f8f8f2"
+      brightYellow: "#f1fa8c"
+      cyan: "#66d9ef"
+      fontFamily: "Hack"
+      green: "#50fa7b"
+      magenta: "#ff79c6"
+      red: "#ff5555"
+      white: "#f8f8f2"
+      yellow: "#e6db74"
   core:
     disabledPackages: [
+      "vim-mode-plus"
+      "ex-mode"
       "wrap-guide"
     ]
     telemetryConsent: "limited"
     themes: [
       "one-dark-ui"
-      "base16-tomorrow-dark-theme"
+      "dracula-syntax"
     ]
     uriHandlerRegistration: "always"
+  editor:
+    fontFamily: "Hack"
   "exception-reporting":
-    userId: "df98affc-49e3-4517-b97b-2c4ce6338040"
+    userId: "eec27448-57cd-4ba4-840b-c7ff0eb53af1"
+  "vim-mode-plus":
+    clearMultipleCursorsOnEscapeInsertMode: true
+    keymapYToYankToLastCharacterOfLine: true
+    stayOnDelete: false
+    stayOnSelectTextObject: false
+    stayOnTransformString: false
+    stayOnVerticalMotion: false
+    stayOnYank: false
+    updateRegisterOnChangeOrSubstitute: true
   welcome:
     showOnStartup: false

@@ -1,3 +1,5 @@
+# from dotfiles
+
 # Your keymap
 #
 # Atom keymaps work similarly to style sheets. Just as style sheets use
@@ -30,3 +32,5 @@
 # If you are unfamiliar with CSON, you can read more about it in the
 # Atom Flight Manual:
 # http://flight-manual.atom.io/using-atom/sections/basic-customization/#configuring-with-cson
+'.platform-win32 atom-workspace, .platform-linux atom-workspace':
+  'ctrl-`': 'atom-ide-terminal:new-terminal-or-current'
