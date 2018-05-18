@@ -1,6 +1,5 @@
 rm %home%\.atom\init.coffee
-rm %home%\.atom\init.js
-mklink /H %home%\.atom\init.js %home%\dotfiles\atom\init.js
+mklink /H %home%\.atom\init.coffee %home%\dotfiles\atom\init.coffee
 
 rm %home%\.atom\config.cson
 mklink /H %home%\.atom\config.cson %home%\dotfiles\atom\config.cson

@@ -26,8 +26,8 @@
     ]
     telemetryConsent: "limited"
     themes: [
-      "one-dark-ui"
-      "dracula-syntax"
+      "seoul-light-ui"
+      "seoul-light-syntax"
     ]
     uriHandlerRegistration: "always"
   editor:
