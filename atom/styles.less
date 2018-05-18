@@ -1,8 +1,56 @@
 // from dotfiles
 // COLOR THEME ENHANCEMENTS
 
-// clean up font decoration
+.theme-solarized-dark-syntax {
+  @solarized-red: #cb4b16;
+  @solarized-orange: #b58900;
+  @solarized-blue: #0c7d9d;
+  @solarized-blue-dark: #073642;
+
+  .cursor-line {
+    background: @solarized-blue-dark;
+  }
+
+  .gutter .line-number.cursor-line {
+    background-color: inherit;
+  }
+
+  .syntax--variable {
+    color: inherit;
+  }
+
+  .syntax--keyword.syntax--control {
+    &.syntax--import,
+    &.syntax--from {
+      color: @solarized-red;
+    }
+  }
+
+  .syntax--entity {
+    &.syntax--name {
+      &.syntax--type {
+        color: @solarized-orange;
+      }
+    }
+  }
+
+  atom-text-editor .gutter .line-number.git-line-modified {
+    border-left: 2px solid @solarized-blue;
+  }
+}
+
 .theme-dracula-syntax {
+  // too much blue... this disables variables colored blue.
+  .syntax--variable {
+    color: inherit;
+  }
+
+  // make git gutter indicator thinner
+  atom-text-editor .gutter .line-number.git-line-added,
+  atom-text-editor .gutter .line-number.git-line-modified {
+    border-left-width: 2px;
+  }
+
   .syntax--storage.syntax--type {
     font-style: normal;
   }
@@ -20,7 +68,8 @@
     font-style: normal;
   }
 
-  .syntax--support.syntax--type, .syntax--support.syntax--class {
+  .syntax--support.syntax--type,
+  .syntax--support.syntax--class {
     font-style: normal;
   }
 }

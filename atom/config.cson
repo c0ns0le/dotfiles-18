@@ -18,6 +18,10 @@
       red: "#ff5555"
       white: "#f8f8f2"
       yellow: "#e6db74"
+  "atom-package-deps":
+    ignored: [
+      "prettier-atom"
+    ]
   core:
     disabledPackages: [
       "vim-mode-plus"
@@ -26,14 +30,19 @@
     ]
     telemetryConsent: "limited"
     themes: [
-      "seoul-light-ui"
-      "seoul-light-syntax"
+      "one-dark-ui"
+      "solarized-dark-syntax"
     ]
     uriHandlerRegistration: "always"
+  "custom-title":
+    template: "<% if (projectPath) { %><%= projectName %> - <% } %><%= fileName %>"
   editor:
     fontFamily: "Hack"
   "exception-reporting":
     userId: "eec27448-57cd-4ba4-840b-c7ff0eb53af1"
+  "prettier-atom":
+    formatOnSaveOptions:
+      enabled: true
   "vim-mode-plus":
     clearMultipleCursorsOnEscapeInsertMode: true
     keymapYToYankToLastCharacterOfLine: true
