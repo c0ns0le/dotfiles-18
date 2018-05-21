@@ -3,7 +3,7 @@
 # TypeScript React
 '.source.tsx':
   'Stateless Component':
-    'prefix': 'xrsl'
+    'prefix': 'jrsl'
     'body': '''
     import * as React from 'react';
 
@@ -25,11 +25,50 @@
 # TypeScript and TypeScript React Only
 '.source.tsx,.source.ts':
   'Import Default Local Module':
-    'prefix': 'xidl'
+    'prefix': 'jdlm'
     'body': '''import $1 from '${2:./}$1';'''
 
 # JavaScript
 '.source.tsx,.source.ts,.source.js,.source.jsx':
   'Console Log':
-    'prefix': 'xc'
+    'prefix': 'jcl'
     'body': '''console.log('$1', $1);$0'''
+
+'.source.js':
+  'Mocha Imports':
+    'prefix': 'jmim'
+    'body': '''const { expect } = require('chai')'''
+  'Mocha Describe':
+    'prefix': 'jmd'
+    'body': '''
+      describe('$1', () => {
+        it('should $2', () => {
+          $0
+        })
+      })
+    '''
+  'Mocha It':
+    'prefix': 'jmi'
+    'body': '''
+      it('should $1', () => {
+        $0
+      })
+    '''
+
+'.source.coffee':
+  'New Short Snippet':
+    'prefix': 'jnss'
+    'body': '''
+    '${1:name}':
+      'prefix': '${2:prefix}'
+      'body': '${3:body}'
+    '''
+  'New Long Snippet':
+    'prefix': 'jnls'
+    'body': '''
+    '${1:name}':
+      'prefix': '${2:prefix}'
+      'body': \'\'\'
+        ${3:body}
+      \'\'\'
+    '''

@@ -4,7 +4,8 @@
 .theme-solarized-dark-syntax {
   @solarized-red: #cb4b16;
   @solarized-orange: #b58900;
-  @solarized-blue: #0c7d9d;
+  @solarized-cyan: #0c7d9d;
+  @solarized-blue: #268bd2;
   @solarized-blue-dark: #073642;
 
   .cursor-line {
@@ -17,6 +18,12 @@
 
   .syntax--variable {
     color: inherit;
+  }
+
+  .syntax--less {
+    .syntax--variable {
+      color: @solarized-blue;
+    }
   }
 
   .syntax--keyword.syntax--control {
@@ -35,7 +42,7 @@
   }
 
   atom-text-editor .gutter .line-number.git-line-modified {
-    border-left: 2px solid @solarized-blue;
+    border-left: 2px solid @solarized-cyan;
   }
 }
 

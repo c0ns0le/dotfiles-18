@@ -12,8 +12,12 @@ Plug 'ryanolsonx/ctrlp-projects.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/async.vim'
 Plug 'ryanolsonx/vim-lsp'
-Plug 'ryanolsonx/vim-lsp-typescript'
-Plug 'ryanolsonx/vim-lsp-python'
+Plug 'ryanolsonx/vim-lsp-typescript',
+  \ { 'do': 'git remote set-url origin https://github.com/ryanolsonx/vim-lsp-typescript.git' }
+Plug 'ryanolsonx/vim-lsp-python',
+  \ { 'do': 'git remote set-url origin https://github.com/ryanolsonx/vim-lsp-python.git' }
+Plug 'ryanolsonx/vim-lsp-css',
+  \ { 'do': 'git remote set-url origin https://github.com/ryanolsonx/vim-lsp-css.git' }
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 " Color schemes
@@ -21,11 +25,12 @@ Plug 'lifepillar/vim-gruvbox8'
 Plug 'lifepillar/vim-solarized8'
 Plug 'arcticicestudio/nord-vim'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'junegunn/seoul256.vim'
 
 " Status Bar
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
-Plug 'itchyny/lightline.vim'
+"Plug 'itchyny/lightline.vim'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -122,6 +127,7 @@ let g:ctrlp_extensions = ['projects']
 
 " Settings
 " --
+set noshowmode
 set number
 set hidden
 syntax on
@@ -143,7 +149,7 @@ set laststatus=2
 " Color theme
 " --
 set background=light
-colo PaperColor
+colo seoul256
 
 function! s:customize_colorscheme()
   if g:colors_name == 'PaperColor'
@@ -154,7 +160,7 @@ endfunction
 augroup customize_colorscheme_group
   autocmd!
   autocmd ColorScheme * call <SID>customize_colorscheme()
-  autocmd ColorScheme * call lightline#update()
+  "autocmd ColorScheme * call lightline#update()
 augroup END
 
 call <SID>customize_colorscheme()
@@ -163,7 +169,7 @@ call <SID>customize_colorscheme()
 " --
 let mapleader = ' '
 nnoremap <leader>x :source %<cr>
-nnoremap <leader>s :w<cr>
+nnoremap <leader>s :w!<cr>
 nnoremap <leader>b :ls<cr>
 nnoremap <leader>p :Neoformat<cr>
 nnoremap <leader>n :NERDTreeToggle<cr>
@@ -181,7 +187,14 @@ nnoremap <c-l> <c-w>l
 "vnoremap <leader>2 "xy:echo @x<cr>
 inoremap jj <esc>
 tnoremap <esc> <c-\><c-n>
+nmap <leader>t :call <SID>SynStack()<CR>
 
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
 " Language Mappings
 " --
 

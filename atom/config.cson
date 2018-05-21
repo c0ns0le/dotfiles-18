@@ -30,8 +30,8 @@
     ]
     telemetryConsent: "limited"
     themes: [
-      "one-dark-ui"
-      "solarized-dark-syntax"
+      "one-light-ui"
+      "one-light-syntax"
     ]
     uriHandlerRegistration: "always"
   "custom-title":
