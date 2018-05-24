@@ -1,5 +1,41 @@
 // from dotfiles
-// COLOR THEME ENHANCEMENTS
+
+@import "ui-variables-custom.less";
+
+.theme-base16-tomorrow-dark-theme {
+  .syntax--variable {
+    // color: inherit;
+  }
+}
+
+// Seoul Status Bar
+.theme-one-dark-ui {
+  @accent-color: red;
+  &.theme-seoul-dark-syntax {
+    @status-bar-background-color: #9a7372;
+    @status-bar-item-hover: lighten(@status-bar-background-color, 8%);
+    @status-bar-item-active: lighten(@status-bar-item-hover, 8%);
+    @status-bar-color: #dfdebd;
+
+    status-bar {
+      background-color: @status-bar-background-color;
+      color: @status-bar-color !important;
+
+      a {
+        color: @status-bar-color !important;
+      }
+    }
+
+    .inline-block {
+      &:hover {
+        background-color: @status-bar-item-hover;
+      }
+      &:active {
+        background-color: @status-bar-item-active;
+      }
+    }
+  }
+}
 
 .theme-solarized-dark-syntax {
   @solarized-red: #cb4b16;

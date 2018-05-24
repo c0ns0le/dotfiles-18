@@ -30,8 +30,8 @@
     ]
     telemetryConsent: "limited"
     themes: [
-      "one-light-ui"
-      "one-light-syntax"
+      "seoul-dark-ui"
+      "seoul-dark-syntax"
     ]
     uriHandlerRegistration: "always"
   "custom-title":
@@ -43,6 +43,9 @@
   "prettier-atom":
     formatOnSaveOptions:
       enabled: true
+      excludedGlobs: [
+        "*.less"
+      ]
   "vim-mode-plus":
     clearMultipleCursorsOnEscapeInsertMode: true
     keymapYToYankToLastCharacterOfLine: true
