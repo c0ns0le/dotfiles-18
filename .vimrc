@@ -63,7 +63,6 @@ color base16-onedark
 " Investigate
 "Plug 'tpope/vim-surround'
 "Plug 'tpope/vim-commentary'
-"Plug 'tpope/vim-unimpaired'
 "Plug 'mattn/emmet-vim'
 
 
@@ -94,12 +93,6 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_custom_ignore = '\v[\/](.*\.egg-info|venv|emacs|sublime|node_modules|__pycache__|target|dist)|(\.(swp|ico|git|svn))$'
 let g:ctrlp_extensions = ['projects']
-
-"" Airline
-"let g:airline_skip_empty_sections = 1
-"let g:airline_section_y = ''
-"let g:airline_powerline_fonts = 1
-"let airline#extensions#whitespace#enabled = 0
 
 " Lightline
 function! LightLineGitHunks()
@@ -155,22 +148,22 @@ let g:lightline = {
   \ }
   \ }
 
-"" Customizations for Color Schemes
-"" --
-"
-"function! s:customize_colorscheme()
-"  if g:colors_name == 'PaperColor'
-"    hi! StatusLine guifg='#444444'
-"  endif
-"endfunction
-"
-"augroup customize_colorscheme_group
-"  autocmd!
-"  autocmd ColorScheme * call <SID>customize_colorscheme()
-"  "autocmd ColorScheme * call lightline#update()
-"augroup END
-"
-"call <SID>customize_colorscheme()
+" Customizations for Color Schemes
+" --
+
+function! s:customize_colorscheme()
+  if g:colors_name == 'PaperColor'
+    hi! StatusLine guifg='#444444'
+  endif
+endfunction
+
+augroup customize_colorscheme_group
+  autocmd!
+  autocmd ColorScheme * call <SID>customize_colorscheme()
+  "autocmd ColorScheme * call lightline#update()
+augroup END
+
+call <SID>customize_colorscheme()
 
 " Mappings
 " --
