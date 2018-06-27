@@ -53,6 +53,9 @@ Plug 'leafgarland/typescript-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'maximbaz/lightline-ale'
 
+" tpope utils
+Plug 'tpope/vim-unimpaired'
+
 call plug#end()
 
 color base16-onedark
@@ -179,6 +182,7 @@ nnoremap <leader>n :NERDTreeToggle<cr>
 nnoremap <leader>f :CtrlP<cr>
 nnoremap <leader>b :CtrlPBuffer<cr>
 nnoremap <leader>c :CtrlPProjects<cr>
+nnoremap <leader>p :PlugInstall<cr>
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gw :Gwrite<cr>
 nnoremap <leader>gc :Gcommit<cr>
