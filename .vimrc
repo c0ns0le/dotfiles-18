@@ -48,6 +48,7 @@ Plug 'tpope/vim-fugitive'
 
 " Syntax highlighting
 Plug 'leafgarland/typescript-vim'
+Plug 'ianks/vim-tsx'
 
 " Status bar
 Plug 'itchyny/lightline.vim'
