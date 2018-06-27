@@ -29,7 +29,7 @@ call plug#begin()
 
 " Color themes
 Plug 'chriskempson/base16-vim'
-""Plug 'lifepillar/vim-solarized8'
+Plug 'lifepillar/vim-solarized8'
 
 " Language completion, linting, etc
 Plug 'w0rp/ale'
@@ -59,7 +59,8 @@ Plug 'tpope/vim-unimpaired'
 
 call plug#end()
 
-color base16-onedark
+set background=light
+color solarized8
 
 " Investigate
 "Plug 'tpope/vim-surround'
@@ -96,6 +97,23 @@ let g:ctrlp_custom_ignore = '\v[\/](.*\.egg-info|venv|emacs|sublime|node_modules
 let g:ctrlp_extensions = ['projects']
 
 " Lightline
+"
+
+fu! LightLineRefresh()
+  "let g:lightline#colorscheme#solarized#palette = {}
+  "call lightline#init()
+  "call lightline#colorscheme()
+  "call lightline#update()
+ " call lightline#highlight()
+ call lightline#disable()
+ call lightline#enable()
+endfu
+
+augroup lightline
+  autocmd!
+  autocmd ColorScheme * call LightLineRefresh()
+augroup END
+
 function! LightLineGitHunks()
   let l:hunks = GitGutterGetHunkSummary()
 
@@ -125,7 +143,7 @@ function! LightLineGitHunks()
 endfunction
 
 let g:lightline = {
-  \ 'colorscheme': 'one',
+  \ 'colorscheme': 'solarized',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'gitbranch', 'githunks', 'readonly', 'filename', 'modified'] ],
