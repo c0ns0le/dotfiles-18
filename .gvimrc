@@ -1,5 +1,5 @@
 if has('gui')
-  set guifont=Hack:h09
+  set guifont=Hack:h11
   set guioptions-=T
   set guioptions-=m
   set guioptions-=l
