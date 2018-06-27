@@ -3,55 +3,27 @@ set nocompatible
 " Plugins
 call plug#begin()
 
-" Navigation / File Exploration
+Plug 'lifepillar/vim-solarized8'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'ryanolsonx/ctrlp-projects.vim'
-
-" LSP
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/async.vim'
-Plug 'ryanolsonx/vim-lsp'
-Plug 'ryanolsonx/vim-lsp-typescript',
-  \ { 'do': 'git remote set-url origin https://github.com/ryanolsonx/vim-lsp-typescript.git' }
-Plug 'ryanolsonx/vim-lsp-python',
-  \ { 'do': 'git remote set-url origin https://github.com/ryanolsonx/vim-lsp-python.git' }
-Plug 'ryanolsonx/vim-lsp-css',
-  \ { 'do': 'git remote set-url origin https://github.com/ryanolsonx/vim-lsp-css.git' }
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-
-" Color schemes
-Plug 'lifepillar/vim-gruvbox8'
-Plug 'lifepillar/vim-solarized8'
-Plug 'arcticicestudio/nord-vim'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'junegunn/seoul256.vim'
-
-" Status Bar
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-"Plug 'itchyny/lightline.vim'
-
-" Git
 Plug 'tpope/vim-fugitive'
+" git gutter is broken is newer versions :/
 Plug 'airblade/vim-gitgutter', { 'commit': '932ffac' }
-
-" Utils
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
-
-" Programming
-"Plug 'SirVer/ultisnips'
-"Plug 'honza/vim-snippets' 
 Plug 'mattn/emmet-vim'
 Plug 'sbdchd/neoformat'
-"Plug 'editorconfig/editorconfig-vim'
-
-" Languages
 Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/tsuquyomi'
 
 call plug#end()
+
+set background=dark
+color solarized8
+
 
 " Plugin Settings
 " --
@@ -77,46 +49,46 @@ let g:airline_section_y = ''
 let g:airline_powerline_fonts = 1
 let airline#extensions#whitespace#enabled = 0
 
-" Lightline
-function! LightLineGitHunks()
-  let l:hunks = GitGutterGetHunkSummary()
-
-  let l:added = l:hunks[0]
-  let l:modified = l:hunks[1]
-  let l:removed = l:hunks[2]
-
-  if l:added == 0 && l:modified == 0 && l:removed == 0
-    return ''
-  endif
-
-  let l:displays = []
-
-  if l:added > 0
-    let l:displays = l:displays + ['+'.l:added]
-  endif
-
-  if l:modified > 0
-    let l:displays = l:displays + ['~'.l:modified]
-  endif
-
-  if l:removed > 0
-    let l:displays = l:displays + ['-'.l:removed]
-  endif
-
-  return join(l:displays, ' ')
-endfunction
-
-let g:lightline = {
-  \ 'colorscheme': 'PaperColor',
-  \ 'active': {
-  \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitbranch', 'githunks', 'readonly', 'filename', 'modified' ] ]
-  \ },
-  \ 'component_function': {
-  \   'gitbranch': 'fugitive#head',
-  \   'githunks': 'LightLineGitHunks'
-  \ }
-  \ }
+"" Lightline
+"function! LightLineGitHunks()
+"  let l:hunks = GitGutterGetHunkSummary()
+"
+"  let l:added = l:hunks[0]
+"  let l:modified = l:hunks[1]
+"  let l:removed = l:hunks[2]
+"
+"  if l:added == 0 && l:modified == 0 && l:removed == 0
+"    return ''
+"  endif
+"
+"  let l:displays = []
+"
+"  if l:added > 0
+"    let l:displays = l:displays + ['+'.l:added]
+"  endif
+"
+"  if l:modified > 0
+"    let l:displays = l:displays + ['~'.l:modified]
+"  endif
+"
+"  if l:removed > 0
+"    let l:displays = l:displays + ['-'.l:removed]
+"  endif
+"
+"  return join(l:displays, ' ')
+"endfunction
+"
+"let g:lightline = {
+"  \ 'colorscheme': 'wombat',
+"  \ 'active': {
+"  \   'left': [ [ 'mode', 'paste' ],
+"  \             [ 'gitbranch', 'githunks', 'readonly', 'filename', 'modified' ] ]
+"  \ },
+"  \ 'component_function': {
+"  \   'gitbranch': 'fugitive#head',
+"  \   'githunks': 'LightLineGitHunks'
+"  \ }
+"  \ }
 
 " CTRL P
 let g:ctrlp_max_height = 30
@@ -127,12 +99,13 @@ let g:ctrlp_extensions = ['projects']
 
 " Settings
 " --
+
+filetype plugin indent on
+syntax on
 set noshowmode
 set number
 set hidden
-syntax on
-filetype plugin indent on
-"set clipboard=unnamed
+set clipboard=unnamed
 set backspace=indent,eol,start
 set tabstop=2
 set shiftwidth=2
@@ -146,10 +119,8 @@ set nobackup
 set noswapfile
 set laststatus=2
 
-" Color theme
+" Customizations for Color Schemes
 " --
-set background=light
-colo seoul256
 
 function! s:customize_colorscheme()
   if g:colors_name == 'PaperColor'
@@ -194,9 +165,9 @@ function! <SID>SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
 " Language Mappings
 " --
-
 augroup language_mappings
   autocmd!
 
