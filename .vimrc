@@ -59,8 +59,8 @@ Plug 'tpope/vim-unimpaired'
 
 call plug#end()
 
-set background=light
-color solarized8
+set background=dark
+color base16-onedark
 
 " Investigate
 "Plug 'tpope/vim-surround'
@@ -77,6 +77,10 @@ let g:ale_completion_enabled = 1
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
   \ 'typescript': ['prettier']
+  \ }
+
+let g:ale_linters = {
+  \ 'typescript': ['prettier', 'tsserver', 'typecheck']
   \ }
 
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
@@ -143,7 +147,7 @@ function! LightLineGitHunks()
 endfunction
 
 let g:lightline = {
-  \ 'colorscheme': 'solarized',
+  \ 'colorscheme': 'one',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'gitbranch', 'githunks', 'readonly', 'filename', 'modified'] ],
