@@ -103,21 +103,6 @@ let g:ctrlp_extensions = ['projects']
 " Lightline
 "
 
-fu! LightLineRefresh()
-  "let g:lightline#colorscheme#solarized#palette = {}
-  "call lightline#init()
-  "call lightline#colorscheme()
-  "call lightline#update()
- " call lightline#highlight()
- call lightline#disable()
- call lightline#enable()
-endfu
-
-augroup lightline
-  autocmd!
-  autocmd ColorScheme * call LightLineRefresh()
-augroup END
-
 function! LightLineGitHunks()
   let l:hunks = GitGutterGetHunkSummary()
 
