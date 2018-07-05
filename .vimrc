@@ -57,7 +57,15 @@ Plug 'maximbaz/lightline-ale'
 " tpope utils
 Plug 'tpope/vim-unimpaired'
 
+" snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
 call plug#end()
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-f>"
+let g:UltiSnipsJumpBackwardTrigger="<c-b>"
 
 set background=dark
 color base16-onedark
@@ -155,6 +163,7 @@ let g:lightline = {
   \   'githunks': 'LightLineGitHunks'
   \ }
   \ }
+
 
 " Customizations for Color Schemes
 " --
