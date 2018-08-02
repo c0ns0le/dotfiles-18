@@ -6,7 +6,8 @@ set nocompatible
 filetype plugin indent on
 syntax on
 set noshowmode
-set number
+set cursorline
+set relativenumber
 set hidden
 set clipboard=unnamed
 set backspace=indent,eol,start
@@ -21,6 +22,7 @@ set incsearch
 set nobackup
 set noswapfile
 set laststatus=2
+set t_Co=256
 
 " Plugins
 " --
@@ -30,6 +32,8 @@ call plug#begin()
 " Color themes
 Plug 'chriskempson/base16-vim'
 Plug 'lifepillar/vim-solarized8'
+Plug 'altercation/vim-colors-solarized'
+Plug 'ajmwagar/vim-deus'
 
 " Language completion, linting, etc
 Plug 'w0rp/ale'
@@ -39,6 +43,8 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " File navigation in project
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Git
 
@@ -49,10 +55,13 @@ Plug 'tpope/vim-fugitive'
 " Syntax highlighting
 Plug 'leafgarland/typescript-vim'
 Plug 'ianks/vim-tsx'
+Plug 'keith/swift.vim'
 
 " Status bar
-Plug 'itchyny/lightline.vim'
-Plug 'maximbaz/lightline-ale'
+"Plug 'itchyny/lightline.vim'
+"Plug 'maximbaz/lightline-ale'
+Plug 'vim-airline/vim-airline' 
+Plug 'vim-airline/vim-airline-themes' 
 
 " tpope utils
 Plug 'tpope/vim-unimpaired'
@@ -67,8 +76,13 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-f>"
 let g:UltiSnipsJumpBackwardTrigger="<c-b>"
 
-set background=dark
-color base16-onedark
+"set background=dark
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
+"set background=light
+"color solarized
 
 " Investigate
 "Plug 'tpope/vim-surround'
@@ -199,6 +213,18 @@ nnoremap <leader>gc :Gcommit<cr>
 nnoremap <leader><leader> :set nohlsearch<cr>
 inoremap jj <esc>
 nmap <leader>t :call <SID>SynStack()<CR>
+nnoremap <C-j> <C-W>j<CR>
+nnoremap <C-k> <C-W>k<CR>
+nnoremap <C-l> <C-W>l<CR>
+nnoremap <C-h> <C-W>h<CR>
+tnoremap <Esc> <C-\><C-n>
+tnoremap jj <C-\><C-n>
+
+fu! AngularSwitchToCode()
+  let &l:currrentFile = expand("%")
+  echo &l:currrentFile
+endfu
+command! ACode :call AngularSwitchToCode()
 
 function! <SID>SynStack()
   if !exists("*synstack")
@@ -206,4 +232,3 @@ function! <SID>SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
-
